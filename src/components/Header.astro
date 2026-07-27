@@ -1,0 +1,102 @@
+---
+import { ChevronDown, Heart, Menu, Search, X } from "@lucide/astro";
+
+const navItems = [
+  { label: "Startseite", href: "/wasser-aesthetic/" },
+  { label: "Deko & Wohnen", href: "/wasser-aesthetic/#produkte", dropdown: true },
+  { label: "Garten & Balkon", href: "/wasser-aesthetic/#garten", dropdown: true },
+  { label: "Geschenke", href: "/wasser-aesthetic/#magazin", dropdown: true },
+  { label: "Rezepte", href: "/wasser-aesthetic/#magazin" },
+  { label: "Inspiration", href: "/wasser-aesthetic/#magazin", dropdown: true },
+  { label: "Über uns", href: "/wasser-aesthetic/#ueber-uns" },
+];
+---
+
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="/wasser-aesthetic/" aria-label="LieblingsIdeen Startseite">
+      <span class="brand-name">LieblingsIdeen <Heart size={20} stroke-width={1.7} aria-hidden="true" /></span>
+      <span class="brand-tagline">Schöne Ideen für dein Zuhause</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Hauptnavigation">
+      {navItems.map((item) => (
+        <a href={item.href}>
+          {item.label}
+          {item.dropdown && <ChevronDown size={14} stroke-width={1.8} aria-hidden="true" />}
+        </a>
+      ))}
+      <button class="search-toggle" type="button" aria-label="Suche öffnen" aria-expanded="false" data-search-toggle>
+        <Search size={21} stroke-width={1.8} aria-hidden="true" />
+      </button>
+    </nav>
+
+    <button class="menu-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" data-menu-toggle>
+      <Menu class="menu-icon" size={25} aria-hidden="true" />
+      <X class="close-icon" size={25} aria-hidden="true" />
+    </button>
+  </div>
+
+  <div class="search-panel" data-search-panel hidden>
+    <form class="site-search" action="/wasser-aesthetic/" method="get" role="search">
+      <label for="site-search">Auf dieser Seite suchen</label>
+      <div>
+        <input id="site-search" name="suche" type="search" placeholder="Wasserlampe, Glasvase, Wellness …" autocomplete="off" />
+        <button type="submit" class="button button-small">Suchen</button>
+      </div>
+    </form>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Mobile Navigation" data-mobile-nav hidden>
+    {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+    <button class="mobile-search" type="button" data-mobile-search>
+      <Search size={18} aria-hidden="true" />
+      Seite durchsuchen
+    </button>
+  </nav>
+</header>
+
+<script>
+  const header = document.querySelector("[data-header]");
+  const menuToggle = header?.querySelector("[data-menu-toggle]");
+  const mobileNav = header?.querySelector("[data-mobile-nav]");
+  const searchToggle = header?.querySelector("[data-search-toggle]");
+  const mobileSearch = header?.querySelector("[data-mobile-search]");
+  const searchPanel = header?.querySelector("[data-search-panel]");
+  const searchInput = header?.querySelector("#site-search");
+
+  const setSearch = (open: boolean) => {
+    if (!(searchPanel instanceof HTMLElement)) return;
+    searchPanel.hidden = !open;
+    searchToggle?.setAttribute("aria-expanded", String(open));
+    if (open && searchInput instanceof HTMLInputElement) searchInput.focus();
+  };
+
+  menuToggle?.addEventListener("click", () => {
+    if (!(mobileNav instanceof HTMLElement)) return;
+    const open = mobileNav.hidden;
+    mobileNav.hidden = !open;
+    menuToggle.setAttribute("aria-expanded", String(open));
+    header?.classList.toggle("menu-open", open);
+  });
+
+  searchToggle?.addEventListener("click", () => {
+    const isOpen = searchToggle.getAttribute("aria-expanded") === "true";
+    setSearch(!isOpen);
+  });
+
+  mobileSearch?.addEventListener("click", () => {
+    if (mobileNav instanceof HTMLElement) mobileNav.hidden = true;
+    menuToggle?.setAttribute("aria-expanded", "false");
+    header?.classList.remove("menu-open");
+    setSearch(true);
+  });
+
+  mobileNav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      if (mobileNav instanceof HTMLElement) mobileNav.hidden = true;
+      menuToggle?.setAttribute("aria-expanded", "false");
+      header?.classList.remove("menu-open");
+    });
+  });
+</script>

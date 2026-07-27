@@ -1,0 +1,17 @@
+{
+  "name": "lieblingsideen",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.6",
+    "@lucide/astro": "^1.27.0",
+    "astro": "^7.1.4",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,67 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+type Props = {
+  title: string;
+  description: string;
+  canonical: string;
+  image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+};
+
+const {
+  title,
+  description,
+  canonical,
+  image = "/images/wasser-aesthetic/og-wasser-aesthetic.avif",
+  imageAlt = "Wasser Aesthetic mit blauer Glasvase und sanften Wasserreflexen",
+  type = "website",
+  jsonLd,
+} = Astro.props;
+
+const absoluteImage = new URL(image, Astro.site);
+const absoluteCanonical = new URL(canonical, Astro.site);
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7fbfd" />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={absoluteCanonical} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="LieblingsIdeen" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={absoluteCanonical} />
+    <meta property="og:image" content={absoluteImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImage} />
+
+    {jsonLd && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

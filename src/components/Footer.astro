@@ -1,0 +1,26 @@
+---
+import { Heart, WavesHorizontal } from "@lucide/astro";
+---
+
+<footer class="site-footer" id="ueber-uns">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-name">LieblingsIdeen <Heart size={18} aria-hidden="true" /></span>
+      <p>Schöne Ideen für ein Zuhause, das sich nach dir anfühlt.</p>
+    </div>
+    <div>
+      <h2>Wasser Aesthetic</h2>
+      <a href="/wasser-aesthetic/#produkte">Produkte entdecken</a>
+      <a href="/wasser-aesthetic/#magazin">Magazin &amp; Inspiration</a>
+      <a href="/wasser-aesthetic/#transparenz">Affiliate-Transparenz</a>
+    </div>
+    <div>
+      <h2>Unser Ansatz</h2>
+      <p>Wir verbinden ruhige Wohnideen, ehrliche Auswahlkriterien und eine hochwertige Bildsprache.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span><WavesHorizontal size={17} aria-hidden="true" /> Mit Ruhe und Liebe kuratiert</span>
+    <span>© {new Date().getFullYear()} LieblingsIdeen</span>
+  </div>
+</footer>

@@ -1,3 +1,8 @@
+import {
+  amazonProductImports,
+  type AffiliateStatus,
+} from "./amazon-products";
+
 export type Product = {
   id: number;
   title: string;
@@ -8,9 +13,18 @@ export type Product = {
   alt: string;
   favorite?: boolean;
   href: string | null;
+  amazonSearchTerm: string;
+  asin: string;
+  affiliateUrl: string | null;
+  affiliateStatus: AffiliateStatus;
 };
 
-export const products: Product[] = [
+type ProductPresentation = Omit<
+  Product,
+  "amazonSearchTerm" | "asin" | "affiliateUrl" | "affiliateStatus"
+>;
+
+const productPresentations: ProductPresentation[] = [
   {
     id: 1,
     title: "Wellenlicht-Projektor mit Wasserreflexen",
@@ -317,6 +331,31 @@ export const products: Product[] = [
     href: null,
   },
 ];
+
+const amazonProductsById = new Map(
+  amazonProductImports.map((product) => [product.id, product]),
+);
+
+export const products: Product[] = productPresentations.map((product) => {
+  const amazonProduct = amazonProductsById.get(product.id);
+  if (!amazonProduct) {
+    throw new Error(`Amazon-Importdaten fehlen für Produkt ${product.id}: ${product.title}`);
+  }
+  if (amazonProduct.title !== product.title) {
+    throw new Error(
+      `Titelabweichung bei Produkt ${product.id}: "${product.title}" / "${amazonProduct.title}"`,
+    );
+  }
+
+  return {
+    ...product,
+    amazonSearchTerm: amazonProduct.amazonSearchTerm,
+    asin: amazonProduct.asin,
+    affiliateUrl: amazonProduct.affiliateUrl,
+    affiliateStatus: amazonProduct.affiliateStatus,
+    href: amazonProduct.affiliateUrl,
+  };
+});
 
 export type Article = {
   slug: string;

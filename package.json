@@ -1,11 +1,15 @@
 {
-  "name": "lieblingsideen",
+  "name": "lebensideen",
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && npm run validate:amazon",
+    "validate:amazon": "node scripts/validate-built-amazon-links.mjs",
     "preview": "astro preview"
   },
   "dependencies": {

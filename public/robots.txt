@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lebensideen.pages.dev/sitemap.xml

@@ -1,0 +1,3 @@
+/wasser-aesthetic/ https://wasser-aesthetic.pages.dev/ 301
+/wasser-aesthetic/magazin/* https://wasser-aesthetic.pages.dev/magazin/:splat 301
+/wasser-aesthetic/* https://wasser-aesthetic.pages.dev/:splat 301

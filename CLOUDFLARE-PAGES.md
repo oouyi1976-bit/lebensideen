@@ -1,6 +1,6 @@
 # Cloudflare Pages
 
-Die Website wird vollständig statisch nach `dist/` gebaut und benötigt keine
+Das Lebensideen-Portal wird vollständig statisch nach `dist/` gebaut und benötigt keine
 Runtime-Secrets oder Datenbank-Bindings.
 
 ## Vorgesehene Git-Integration
@@ -17,8 +17,7 @@ Runtime-Secrets oder Datenbank-Bindings.
 | Umgebungsvariable | `NODE_VERSION=22.14.0` |
 
 Nach dem ersten Import des GitHub-Repositories veröffentlicht Cloudflare Pages
-jeden neuen Commit auf `main` automatisch. Die Landingpage liegt im Build unter
-`/wasser-aesthetic/`.
+jeden neuen Commit auf `main` automatisch. Das Portal liegt im Build unter `/`.
 
 ## Warum Node 22
 

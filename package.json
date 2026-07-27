@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && npm run validate:amazon",
+    "build": "astro check && astro build",
     "validate:amazon": "node scripts/validate-built-amazon-links.mjs",
     "preview": "astro preview"
   },

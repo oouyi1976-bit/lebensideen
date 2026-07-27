@@ -1,7 +1,8 @@
-# Lebensideen – Wasser Aesthetic
+# Lebensideen
 
-Statische, responsive Affiliate-Landingpage mit Astro. Der sichtbare
-Website-Name bleibt entsprechend der Designvorlage „LieblingsIdeen“.
+Statische, responsive Portal-Seite mit Astro. Sie bündelt die eigenständigen
+Lebensideen-Themenwelten und leitet frühere Wasser-Aesthetic-Routen dauerhaft
+auf das neue Projekt weiter.
 
 ## Lokale Entwicklung
 
@@ -10,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Die Seite ist anschließend unter `/wasser-aesthetic/` erreichbar.
+Die Portal-Seite ist anschließend unter `/` erreichbar.
 
 ## Produktions-Build
 
@@ -20,20 +21,12 @@ npm run build
 
 Der statische Build wird in `dist/` erzeugt.
 
-## Affiliate-Transparenz
+## Projektstruktur
 
-Amazon.de war während der Umsetzung aus der Arbeitsumgebung nicht direkt
-erreichbar. Deshalb enthält die Seite bewusst keine ungeprüften Affiliate-Links.
-Alle 30 Produktkarten sind als Platzhalter mit „Amazon-Link folgt“ markiert.
-Nach einer manuellen Amazon-Prüfung wird in
-`src/data/amazon-products.ts` entweder eine ASIN oder eine Amazon.de-Produkt-URL
-eingetragen. Die kanonische Affiliate-URL im Format
-`https://www.amazon.de/dp/ASIN?tag=epic05e-21` wird automatisch erzeugt. Bild,
-Titel und Button erhalten automatisch denselben Link inklusive
-`target="_blank"` und `rel="nofollow sponsored noopener noreferrer"`.
-
-Die vollständige Importanleitung und die Liste aller 30 Suchaufträge stehen in
-[`AMAZON-ASIN-IMPORT.md`](./AMAZON-ASIN-IMPORT.md).
+Die Wasser-Aesthetic-Seite wird eigenständig unter
+`https://wasser-aesthetic.pages.dev/` veröffentlicht. Die frühere Unteradresse
+`/wasser-aesthetic/` sowie ihre Magazinpfade werden über `public/_redirects`
+mit HTTP 301 weitergeleitet.
 
 ## Cloudflare Pages
 
